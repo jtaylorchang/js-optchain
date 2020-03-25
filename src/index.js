@@ -1,4 +1,4 @@
-const oc = (optionalObj, schema) => {
+export default (optionalObj, schema) => {
   if (optionalObj == undefined || schema == undefined) {
     return schema;
   }
@@ -19,5 +19,3 @@ const oc = (optionalObj, schema) => {
 
   return obj;
 };
-
-export default oc;

@@ -9,6 +9,9 @@ The returned result is an object that will match the schema and have default val
 Therefore, all of these inputs are valid:
 
 ```javascript
+// import oc from "js-optchain";
+const oc = require("js-optchain").default;
+
 const handler1 = {
   event: {}
 };

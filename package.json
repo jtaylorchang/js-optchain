@@ -1,6 +1,6 @@
 {
   "name": "js-optchain",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "JS schema-based optional chaining",
   "main": "./dist/index.js",
   "scripts": {

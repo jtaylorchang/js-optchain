@@ -14,9 +14,11 @@
   },
   "keywords": [
     "js",
+    "javascript",
     "optchain",
     "optional",
-    "chaining"
+    "chaining",
+    "schema"
   ],
   "author": "Jeff Taylor-Chang",
   "license": "ISC",

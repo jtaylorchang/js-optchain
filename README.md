@@ -1,5 +1,37 @@
 # js-optchain
 
+This package adds schema-based optional chaining to javascript. Simply wrap the object with the `oc` and define your default schema. This will create an object containing all fields **specified in the schema** with the existing values or default ones from the schema if the data is undefined. The optional chain is recursively generated so schemas can be multi-level. See [Usage](#Usage) for examples.
+
+## Installation
+
+NPM:
+
+```bash
+npm install js-optchain
+```
+
+Yarn:
+
+```bash
+yarn add js-optchain
+```
+
+### Importing:
+
+With _import_:
+
+```javascript
+import oc from "js-optchain";
+```
+
+With _require_:
+
+```javascript
+const oc = require("js-optchain").default;
+```
+
+## Usage
+
 The first argument is as far into the chain as you can get with confidence that your final child is the only one that may be optional.
 
 The second argument is the schema of its optional chain with default values.

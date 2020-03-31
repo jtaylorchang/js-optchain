@@ -1,5 +1,7 @@
 # js-optchain
 
+![](https://img.shields.io/npm/v/js-optchain) ![](https://img.shields.io/bundlephobia/min/js-optchain) ![](https://img.shields.io/npm/l/js-optchain) ![](https://img.shields.io/npm/dt/js-optchain)
+
 This package adds schema-based optional chaining to javascript. Simply wrap the object with the `oc` and define your default schema. This will create an object containing all fields **specified in the schema** with the existing values or default ones from the schema if the data is undefined. The optional chain is recursively generated so schemas can be multi-level. See [Usage](#Usage) for examples.
 
 ## Installation

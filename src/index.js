@@ -1,5 +1,9 @@
 const oc = (optionalObj, schema) => {
-  if (optionalObj == undefined || schema == undefined) {
+  if (
+    optionalObj == undefined ||
+    schema == undefined ||
+    schema.constructor !== Object
+  ) {
     return schema;
   }
 
@@ -9,7 +13,7 @@ const oc = (optionalObj, schema) => {
 
   for (const [key, value] of entries) {
     if (optionalObj[key] != undefined) {
-      if (typeof value === "object") {
+      if (value.constructor === Object) {
         obj[key] = oc(optionalObj[key], value);
       } else {
         obj[key] = optionalObj[key];

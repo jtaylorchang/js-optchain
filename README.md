@@ -34,11 +34,11 @@ const oc = require("js-optchain").default;
 
 ## Usage
 
-The first argument is as far into the chain as you can get with confidence that your final child is the only one that may be optional.
+The first argument is the object you want to explore that may or may not be `undefined`.
 
 The second argument is the schema of its optional chain with default values.
 
-The returned result is an object that will match the schema and have default values if none could be populated.
+The returned result is an object that will match the schema and have default values if the found values are `undefined`. This can include nested objects, see examples below.
 
 Therefore, all of these inputs are valid:
 
@@ -47,47 +47,74 @@ Therefore, all of these inputs are valid:
 const oc = require("js-optchain").default;
 
 const handler1 = {
-  event: {}
+  event: {},
 };
 
 const handler2 = {
   event: {
-    body: {}
-  }
+    body: {},
+  },
 };
 
 const handler3 = {
   event: {
     body: {
-      username: "jeff"
-    }
-  }
+      username: "jeff",
+    },
+  },
 };
 
 const handler4 = {
   event: {
     body: {
       username: "jeff",
-      password: "password"
-    }
-  }
+      password: "password",
+    },
+  },
+};
+
+const handler5 = {
+  event: {
+    body: {
+      user: {
+        username: "jeff",
+      },
+    },
+  },
 };
 
 const ocBody1 = oc(handler1.event.body, {
   username: "defaultUsername",
-  password: "defaultPassword"
+  password: "defaultPassword",
 });
 const ocBody2 = oc(handler2.event.body, {
   username: "defaultUsername",
-  password: "defaultPassword"
+  password: "defaultPassword",
 });
 const ocBody3 = oc(handler3.event.body, {
   username: "defaultUsername",
-  password: "defaultPassword"
+  password: "defaultPassword",
 });
 const ocBody4 = oc(handler4.event.body, {
   username: "defaultUsername",
-  password: "defaultPassword"
+  password: "defaultPassword",
+});
+const ocBody5 = oc(handler5.event.body, {
+  user: {
+    username: "defaultUsername",
+    password: "defaultPassword",
+  },
+});
+const ocEvent5 = oc(handler5.event, {
+  body: {
+    user: {
+      username: "defaultUsername",
+      password: "defaultPassword",
+    },
+    config: {
+      isAdmin: true,
+    },
+  },
 });
 
 console.log(
@@ -102,4 +129,13 @@ console.log(
   ocBody3.username === "jeff" && ocBody3.password === "defaultPassword"
 );
 console.log(ocBody4.username === "jeff" && ocBody4.password === "password");
+console.log(
+  ocBody5.user.username === "jeff" &&
+    ocBody5.user.password === "defaultPassword"
+);
+console.log(
+  ocEvent5.body.user.username === "jeff" &&
+    ocEvent5.body.user.password === "defaultPassword" &&
+    ocEvent5.body.config.isAdmin === true
+);
 ```

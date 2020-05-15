@@ -38,6 +38,8 @@ The first argument is the object you want to explore that may or may not be `und
 
 The second argument is the schema of its optional chain with default values.
 
+There is an optional third argument that defaults to true and allows partial schemas (see handler 6 below for an example)
+
 The returned result is an object that will match the schema and have default values if the found values are `undefined`. This can include nested objects, see examples below.
 
 Therefore, all of these inputs are valid:
@@ -83,6 +85,17 @@ const handler5 = {
   },
 };
 
+const handler6 = {
+  event: {
+    body: {
+      user: {
+        username: "jeff",
+        password: "password",
+      },
+    },
+  },
+};
+
 const ocBody1 = oc(handler1.event.body, {
   username: "defaultUsername",
   password: "defaultPassword",
@@ -116,6 +129,11 @@ const ocEvent5 = oc(handler5.event, {
     },
   },
 });
+const ocEvent6 = oc(handler6.event, {
+  body: {
+    user: {},
+  },
+});
 
 console.log(
   ocBody1.username === "defaultUsername" &&
@@ -137,5 +155,9 @@ console.log(
   ocEvent5.body.user.username === "jeff" &&
     ocEvent5.body.user.password === "defaultPassword" &&
     ocEvent5.body.config.isAdmin === true
+);
+console.log(
+  ocEvent6.body.user.username === "jeff" &&
+    ocEvent6.body.user.password === "password"
 );
 ```

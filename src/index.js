@@ -1,7 +1,9 @@
 const oc = (optionalObj, schema, allowPartials = true) => {
   if (
-    optionalObj == undefined ||
-    schema == undefined ||
+    optionalObj === null ||
+    optionalObj === undefined ||
+    schema === null ||
+    schema === undefined ||
     schema.constructor !== Object
   ) {
     return schema;

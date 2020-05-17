@@ -22,8 +22,12 @@ const oc = (optionalObj, schema, allowPartials = true) => {
   const entries = Object.entries(schema);
 
   for (const [key, value] of entries) {
-    if (optionalObj[key] != undefined) {
-      if (value.constructor === Object) {
+    if (optionalObj[key] !== undefined) {
+      if (
+        value !== null &&
+        value !== undefined &&
+        value.constructor === Object
+      ) {
         obj[key] = oc(optionalObj[key], value, allowPartials);
       } else {
         obj[key] = optionalObj[key];

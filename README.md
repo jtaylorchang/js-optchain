@@ -34,13 +34,37 @@ const oc = require("js-optchain").default;
 
 ## Usage
 
-The first argument is the object you want to explore that may or may not be `undefined`.
+```javascript
+/**
+ * Wrap an object with optional properties which should have default values if undefined.
+ *
+ * To use partials, set the element in the schema to `{}` or an object with children to include all of its children that it may or may not have.
+ *
+ * Partials are enabled by default. If partials are not enabled, the output will strictly match the schema shape.
+ *
+ * @param {*} optionalObj The object to wrap
+ * @param {*} schema The schema with default values which should be returned
+ * @param {*} allowPartials (Optional) True if elements in the wrapped object should be included even if they don't appear in the schema
+ */
+const ocObj = oc(obj, schema, allowPartials);
+```
 
-The second argument is the schema of its optional chain with default values.
+- The first argument is the object you want to explore that may or may not be `undefined`.
+- The second argument is the schema of its optional chain with default values.
+- There is an optional third argument that defaults to true and allows partial schemas (see handler/ocBody 6 below for an example)
+- The returned result is an object that will match the schema and have default values if the found values are `undefined`. This can include nested objects, see examples below.
 
-There is an optional third argument that defaults to true and allows partial schemas (see handler/ocBody 6 below for an example)
+## Examples
 
-The returned result is an object that will match the schema and have default values if the found values are `undefined`. This can include nested objects, see examples below.
+Below are a series of examples that match the following. To view an example, see the `handler`, `oc()` and `console.log` for each number to see what the expected inputs and outputs are.
+
+- `ocBody1`: Passing an undefined object into the `oc` wrapper (object is undefined)
+- `ocBody2`: Passing an empty object into the `oc` wrapper (object has none of the schema properties)
+- `ocBody3`: Passing a partial object into the `oc` wrapper (object only has some of the schema properties)
+- `ocBody4`: Passing a complete object into the `oc` wrapper (object has all the schema properties)
+- `ocBody5`: Passing a nested object into the `oc` wrapper (schema contains multiple layers)
+- `ocEvent5`: Passing a more complex object into the `oc` wrapper
+- `ocEvent6`: Passing an object into the `oc` wrapper with partials disabled
 
 Therefore, all of these inputs are valid:
 
@@ -136,7 +160,7 @@ const ocEvent6 = oc(
       user: {},
     },
   },
-  true
+  false
 );
 
 console.log(
@@ -160,8 +184,5 @@ console.log(
     ocEvent5.body.user.password === "defaultPassword" &&
     ocEvent5.body.config.isAdmin === true
 );
-console.log(
-  ocEvent6.body.user.username === "jeff" &&
-    ocEvent6.body.user.password === "password"
-);
+console.log(ocEvent6.body.user === {});
 ```

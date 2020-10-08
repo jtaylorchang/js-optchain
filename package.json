@@ -1,5 +1,5 @@
 {
-  "name": "@jtaylorchang/js-optchain",
+  "name": "js-optchain",
   "version": "2.0.4",
   "description": "JS schema-based optional chaining",
   "main": "./dist/index.js",
@@ -26,9 +26,6 @@
     "url": "https://github.com/jtaylorchang/js-optchain/issues"
   },
   "homepage": "https://github.com/jtaylorchang/js-optchain#readme",
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
-  },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-preset-es2015": "^6.24.1"

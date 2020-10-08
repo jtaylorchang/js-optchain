@@ -1,3 +1,14 @@
+/**
+ * Wrap an object with optional properties which should have default values if undefined.
+ *
+ * To use partials, set the element in the schema to `{}` or an object with children to include all of its children that it may or may not have.
+ *
+ * Partials are enabled by default. If partials are not enabled, the output will strictly match the schema shape.
+ *
+ * @param {*} optionalObj The object to wrap
+ * @param {*} schema The schema with default values which should be returned
+ * @param {*} allowPartials (Optional) True if elements in the wrapped object should be included even if they don't appear in the schema
+ */
 const oc = (optionalObj, schema, allowPartials = true) => {
   if (
     optionalObj === null ||

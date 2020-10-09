@@ -1,2 +1,5 @@
 src
 tests
+.babelrc
+.eslintrc
+.prettierrc

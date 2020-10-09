@@ -1,0 +1,13 @@
+{
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module"
+  },
+  "rules": {
+    "import/order": "off",
+    "no-unused-expressions": "off",
+    "handle-callback-err": "off",
+    "prefer-promise-reject-errors": "off"
+  },
+  "extends": ["prettier"]
+}

@@ -23,13 +23,13 @@ yarn add js-optchain
 With **import**:
 
 ```javascript
-import oc from "js-optchain";
+import oc from 'js-optchain';
 ```
 
 With **require**:
 
 ```javascript
-const oc = require("js-optchain").default;
+const oc = require('js-optchain').default;
 ```
 
 ## Usage
@@ -71,95 +71,95 @@ Therefore, all of these inputs are valid:
 
 ```javascript
 // import oc from "js-optchain";
-const oc = require("js-optchain").default;
+const oc = require('js-optchain').default;
 
 const handler1 = {
-  event: {},
+  event: {}
 };
 
 const handler2 = {
   event: {
-    body: {},
-  },
+    body: {}
+  }
 };
 
 const handler3 = {
   event: {
     body: {
-      username: "jeff",
-    },
-  },
+      username: 'jeff'
+    }
+  }
 };
 
 const handler4 = {
   event: {
     body: {
-      username: "jeff",
-      password: "password",
-    },
-  },
+      username: 'jeff',
+      password: 'password'
+    }
+  }
 };
 
 const handler5 = {
   event: {
     body: {
       user: {
-        username: "jeff",
-      },
-    },
-  },
+        username: 'jeff'
+      }
+    }
+  }
 };
 
 const handler6 = {
   event: {
     body: {
       user: {
-        username: "jeff",
-        password: "password",
-      },
-    },
-  },
+        username: 'jeff',
+        password: 'password'
+      }
+    }
+  }
 };
 
 const ocBody1 = oc(handler1.event.body, {
-  username: "defaultUsername",
-  password: "defaultPassword",
+  username: 'defaultUsername',
+  password: 'defaultPassword'
 });
 const ocBody2 = oc(handler2.event.body, {
-  username: "defaultUsername",
-  password: "defaultPassword",
+  username: 'defaultUsername',
+  password: 'defaultPassword'
 });
 const ocBody3 = oc(handler3.event.body, {
-  username: "defaultUsername",
-  password: "defaultPassword",
+  username: 'defaultUsername',
+  password: 'defaultPassword'
 });
 const ocBody4 = oc(handler4.event.body, {
-  username: "defaultUsername",
-  password: "defaultPassword",
+  username: 'defaultUsername',
+  password: 'defaultPassword'
 });
 const ocBody5 = oc(handler5.event.body, {
   user: {
-    username: "defaultUsername",
-    password: "defaultPassword",
-  },
+    username: 'defaultUsername',
+    password: 'defaultPassword'
+  }
 });
 const ocEvent5 = oc(handler5.event, {
   body: {
     user: {
-      username: "defaultUsername",
-      password: "defaultPassword",
+      username: 'defaultUsername',
+      password: 'defaultPassword'
     },
     config: {
-      isAdmin: true,
-    },
-  },
+      isAdmin: true
+    }
+  }
 });
 const ocEvent6 = oc(
   handler6.event,
   {
     body: {
-      user: {},
-    },
+      user: {}
+    }
   },
   false
 );
@@ -167,36 +167,22 @@ const ocEvent6NoPartials = oc(
   handler6.event,
   {
     body: {
-      user: {},
-    },
+      user: {}
+    }
   },
   false
 );
 
+console.log(ocBody1.username === 'defaultUsername' && ocBody1.password === 'defaultPassword');
+console.log(ocBody2.username === 'defaultUsername' && ocBody2.password === 'defaultPassword');
+console.log(ocBody3.username === 'jeff' && ocBody3.password === 'defaultPassword');
+console.log(ocBody4.username === 'jeff' && ocBody4.password === 'password');
+console.log(ocBody5.user.username === 'jeff' && ocBody5.user.password === 'defaultPassword');
 console.log(
-  ocBody1.username === "defaultUsername" &&
-    ocBody1.password === "defaultPassword"
-);
-console.log(
-  ocBody2.username === "defaultUsername" &&
-    ocBody2.password === "defaultPassword"
-);
-console.log(
-  ocBody3.username === "jeff" && ocBody3.password === "defaultPassword"
-);
-console.log(ocBody4.username === "jeff" && ocBody4.password === "password");
-console.log(
-  ocBody5.user.username === "jeff" &&
-    ocBody5.user.password === "defaultPassword"
-);
-console.log(
-  ocEvent5.body.user.username === "jeff" &&
-    ocEvent5.body.user.password === "defaultPassword" &&
+  ocEvent5.body.user.username === 'jeff' &&
+    ocEvent5.body.user.password === 'defaultPassword' &&
     ocEvent5.body.config.isAdmin === true
 );
-console.log(
-  ocEvent6.body.user.username === "jeff" &&
-    ocEvent6.body.user.password === "password"
-);
+console.log(ocEvent6.body.user.username === 'jeff' && ocEvent6.body.user.password === 'password');
 console.log(ocEvent6NoPartials.body.user === {});
 ```

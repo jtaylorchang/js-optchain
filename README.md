@@ -64,7 +64,8 @@ Below are a series of examples that match the following. To view an example, see
 - `ocBody4`: Passing a complete object into the `oc` wrapper (object has all the schema properties)
 - `ocBody5`: Passing a nested object into the `oc` wrapper (schema contains multiple layers)
 - `ocEvent5`: Passing a more complex object into the `oc` wrapper
-- `ocEvent6`: Passing an object into the `oc` wrapper with partials disabled
+- `ocEvent6`: Passing an object into the `oc` wrapper with partials
+- `ocEvent6NoPartials`: Passing an object into the `oc` wrapper with partials disabled
 
 Therefore, all of these inputs are valid:
 
@@ -162,6 +163,15 @@ const ocEvent6 = oc(
   },
   false
 );
+const ocEvent6NoPartials = oc(
+  handler6.event,
+  {
+    body: {
+      user: {},
+    },
+  },
+  false
+);
 
 console.log(
   ocBody1.username === "defaultUsername" &&
@@ -184,5 +194,9 @@ console.log(
     ocEvent5.body.user.password === "defaultPassword" &&
     ocEvent5.body.config.isAdmin === true
 );
-console.log(ocEvent6.body.user === {});
+console.log(
+  ocEvent6.body.user.username === "jeff" &&
+    ocEvent6.body.user.password === "password"
+);
+console.log(ocEvent6NoPartials.body.user === {});
 ```

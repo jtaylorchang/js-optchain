@@ -20,13 +20,13 @@ yarn add js-optchain
 
 ### Importing:
 
-With _import_:
+With **import**:
 
 ```javascript
 import oc from "js-optchain";
 ```
 
-With _require_:
+With **require**:
 
 ```javascript
 const oc = require("js-optchain").default;
